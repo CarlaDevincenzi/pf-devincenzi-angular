@@ -1,0 +1,89 @@
+
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="grid formgrid">
+        <h2>Editar estudiante</h2>
+        <div class="col-6">
+          <mat-form-field class="w-full">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="name" matInput type="text" />
+          </mat-form-field>
+    
+          <div class="row" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+            <div class="text-danger"  >
+                <small  *ngIf="name?.errors?.['required']">
+                El nombre es obligatorio
+                </small>
+                <small  *ngIf="name?.errors?.['minlength']">
+                    Debe contener minimo 2 letras
+                </small>
+                <small  *ngIf="name?.errors?.['pattern']">
+                    Debe ingresar solo letras
+                </small>
+            </div>
+        </div>
+    
+        </div>
+        <div class="col-6">
+          <mat-form-field class="w-full">
+            <mat-label>Apellido</mat-label>
+            <input formControlName="lastName" matInput type="text" />
+          </mat-form-field>
+    
+          <div class="row" *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+            <div class="text-danger"  >
+                <small  *ngIf="lastName?.errors?.['required']">
+                El apellido es obligatorio
+                </small>
+                <small  *ngIf="lastName?.errors?.['minlength']">
+                    Debe contener minimo 2 letras
+                </small>
+                <small  *ngIf="lastName?.errors?.['pattern']">
+                    Debe ingresar solo letras
+                </small>
+            </div>
+        </div>
+    
+        </div>
+        <div class="col-12">
+          <mat-form-field class="w-full">
+            <mat-label>DNI</mat-label>
+            <input formControlName="dni" matInput type="text" />
+          </mat-form-field>
+    
+          <div *ngIf="dni?.invalid && (dni?.dirty || dni?.touched)"
+                class="text-danger">
+                <small *ngIf="dni?.errors?.['required']">
+                    El DNI es requerido.
+                </small>
+                <small *ngIf="dni?.errors?.['pattern']">
+                    El DNI solo puede tener numeros
+                </small>
+                <small *ngIf="dni?.errors?.['minlength'] || dni?.errors?.['maxlength']">
+                    El DNI debe contener 7 o 8 numeros
+                </small>
+            </div>
+    
+        </div>
+        <div class="col-6">
+          <mat-form-field class="w-full">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput type="email" />
+          </mat-form-field>
+    
+          <div class="row" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            <div class="text-danger"  >
+                <small  *ngIf="email?.errors?.['required']">
+                El Email es obligatorio
+                </small>
+                <small  *ngIf="email?.errors?.['email']">
+                    Formato incorrecto
+                </small>
+            </div>
+        </div>
+    
+        </div>
+    
+        <div class="col-12 flex justify-content-end">
+          <button mat-flat-button color="primary">Actualizar</button>
+        </div>
+      </form>
+

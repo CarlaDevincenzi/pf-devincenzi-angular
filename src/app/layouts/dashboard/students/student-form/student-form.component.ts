@@ -1,25 +1,48 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Student } from '../../../../models/student';
+import { StudentService } from '../../../../services/student.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-form',
   templateUrl: './student-form.component.html',
   styleUrl: './student-form.component.scss'
 })
-export class StudentFormComponent {
+export class StudentFormComponent implements OnInit{  
 
-  studentForm: FormGroup;
+  studentForm!: FormGroup;
+  student?: Student;
+  
 
-  @Output() studentSubmit = new EventEmitter();
+  constructor(private fb: FormBuilder, private studentService: StudentService, 
+    private router: Router, private activateRoute: ActivatedRoute) { }
+  
+  
+    ngOnInit(): void {
+    const id = this.activateRoute.snapshot.paramMap.get("id");
 
-  constructor(private fb: FormBuilder) {
-    this.studentForm = this.fb.group({
-      name: this.fb.control('', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]),
-      lastName: this.fb.control('', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]),
-      dni: this.fb.control('', [Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(7),Validators.maxLength(8)]),
-      email: this.fb.control('', [Validators.required, Validators.email])      
-    });
+    if(id) {
+      this.studentService.getStudentById(parseInt(id))
+      .subscribe(student => {
+        this.student = student;
+
+        this.studentForm = this.fb.group({
+          name: this.fb.control(student?.name, [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]),
+          lastName: this.fb.control(student?.lastName, [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]),
+          dni: this.fb.control(student?.dni, [Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(7),Validators.maxLength(8)]),
+          email: this.fb.control(student?.email, [Validators.required, Validators.email])      
+        });
+      })        
+      
+    } else {
+      this.studentForm = this.fb.group({
+        name: this.fb.control('', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]),
+        lastName: this.fb.control('', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]),
+        dni: this.fb.control('', [Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(7),Validators.maxLength(8)]),
+        email: this.fb.control('', [Validators.required, Validators.email])      
+      });
+    }
   }
 
   get name() {return this.studentForm.get('name')}
@@ -27,12 +50,21 @@ export class StudentFormComponent {
   get dni() { return this.studentForm.get('dni')}  
   get email() {return this.studentForm.get('email')}
 
-  onSubmit() {
+  onSubmit() {    
     if (this.studentForm.valid) {
-      this.studentSubmit.emit(this.studentForm.value as Student);
-      this.studentForm.reset({});
-      this.studentForm.markAsPristine();
-      this.studentForm.markAsUntouched();
+      if(this.student) {
+          this.studentService.updateStudentById(this.student.id, this.studentForm.value as Student)
+        .subscribe(() => {
+          this.router.navigateByUrl("/students");
+        })     
+        this.studentForm.reset({});   
+      } else {
+        this.studentService.addStudent(this.studentForm.value as Student)
+        .subscribe(() => {
+          this.router.navigateByUrl("/students");
+        })     
+        this.studentForm.reset({});   
+      }      
       
     } else {
       this.studentForm.markAllAsTouched();

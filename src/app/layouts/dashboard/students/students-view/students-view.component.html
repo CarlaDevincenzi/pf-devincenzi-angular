@@ -1,5 +1,10 @@
 <div class="mat-elevation-z8">
     <h2>Listado de estudiantes</h2>
+
+    <div class="text-end">
+      <button class="btn btn-primary me-2" [routerLink]="['nuevo']" >Agregar estudiante</button>
+    </div>
+
   <table mat-table [dataSource]="dataSource">
 
     <!-- Position Column -->
@@ -26,24 +31,22 @@
       <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="modify">
-      <th mat-header-cell *matHeaderCellDef></th>
+    <ng-container matColumnDef="Acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
       <td mat-cell *matCellDef="let element">
-        <button  (click)="updateStudent(element)" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+        <button  [routerLink]="[element.id,'editar']" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
           <mat-icon>edit</mat-icon>
         </button>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element">
-        <button  (click)="deleteStudent(element)" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+        <button  (click)="deleteStudent(element)" mat-icon-button color="warn" aria-label="Example icon button with a home icon">
           <mat-icon>delete</mat-icon>
         </button>
+        <button  (click)="verMas(element.id)" mat-icon-button color="accent" aria-label="Example icon button with a home icon">
+          <mat-icon>add</mat-icon>
+        </button>        
       </td>
     </ng-container>
 
+    
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

@@ -1,5 +1,6 @@
 import {  Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Student } from '../../../../models/student';
+import { StudentService } from '../../../../services/student.service';
 
 
 @Component({
@@ -9,32 +10,34 @@ import { Student } from '../../../../models/student';
 })
 export class StudentsViewComponent {
   
-  constructor() {
+  constructor(private studentService: StudentService) {
+    this.getStudents();
+   }  
 
-  }  
-
-  @Input() dataSource!: Student[];
-  @Output() studentEditSubmit = new EventEmitter();
+  dataSource: Student[] = [];
  
 
-  displayedColumns: string[] = ['Id', 'Nombre Completo', 'DNI', 'Email', 'modify', 'delete'];
+  displayedColumns: string[] = ['Id', 'Nombre Completo', 'DNI', 'Email', 'Acciones'];
+
+  getStudents(){
+    this.studentService.getAllStudents().subscribe({
+      next: (students) => this.dataSource = students
+    })
+  }
   
 
   deleteStudent(student: Student): void {
     let opcion = confirm(`Desea eliminar al estudiante: ${student.name} ${student.lastName} ?` );
 
-    if(opcion)     
-      this.dataSource = this.dataSource.filter(el => el.id != student.id);
+    if(opcion){
+      this.studentService.deleteStudent(student.id).subscribe({
+        next: (students) => this.dataSource = [...students]
+      })
+    }     
       
-  }
+  }  
 
-  // le envio al dashboard un objeto 
-  updateStudent(student: Student) {
-    this.studentEditSubmit.emit({
-      editVisible: true,
-      studentToEdit: student
-    });
-  }
+  verMas(id: Number){}
   
 }
 

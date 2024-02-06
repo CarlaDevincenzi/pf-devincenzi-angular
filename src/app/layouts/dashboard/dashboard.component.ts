@@ -9,39 +9,38 @@ import { StudentService } from '../../services/student.service';
 })
 export class DashboardComponent {
 
-  constructor(private studentService: StudentService) {}
-
-  dataSource = this.studentService.getAllStudents(); 
+  constructor() {}
+   
   
   showFiller = false;
   showEditForm = false;
-  studentEdit!: Student ;
+  //studentEdit!: Student ;
 
-  onStudentSubmit(ev: Student): void {
-      let lastStudent = this.dataSource[this.dataSource.length -1 ];      
-      ev.id = lastStudent.id +1;
-      this.dataSource = [...this.dataSource, ev];
-  }
+//   onStudentSubmit(ev: Student): void {
+//       let lastStudent = this.dataSource[this.dataSource.length -1 ];      
+//       ev.id = lastStudent.id +1;
+//       this.dataSource = [...this.dataSource, ev];
+//   }
 
-  onStudentEditSubmit(ev: any): void {
-    if(ev.editVisible) {
-      this.showEditForm = true;
-      this.studentEdit = ev.studentToEdit;
-    }    
-}
+//   onStudentEditSubmit(ev: any): void {
+//     if(ev.editVisible) {
+//       this.showEditForm = true;
+//       this.studentEdit = ev.studentToEdit;
+//     }    
+// }
 
-onStudentModify(ev: Student) {
-    //let indice: number = this.dataSource.findIndex(s => s.id === ev.id );
-    // tuve que hacer esto de eliminar y volver a agregar porque de otra manera no me lo actualizaba
-    console.log(ev)
-    console.log(ev.id)
-    this.dataSource = this.dataSource.filter(el => el.id != ev.id);
+// onStudentModify(ev: Student) {
+//     //let indice: number = this.dataSource.findIndex(s => s.id === ev.id );
+//     // tuve que hacer esto de eliminar y volver a agregar porque de otra manera no me lo actualizaba
+//     console.log(ev)
+//     console.log(ev.id)
+//     this.dataSource = this.dataSource.filter(el => el.id != ev.id);
     
-    this.dataSource = [...this.dataSource, ev];
+//     this.dataSource = [...this.dataSource, ev];
     
-    this.showEditForm = false;
+//     this.showEditForm = false;
 
-    console.log(this.dataSource) 
-}
+//     console.log(this.dataSource) 
+// }
 
 }

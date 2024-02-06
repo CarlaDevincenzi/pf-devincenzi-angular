@@ -1,5 +1,11 @@
 <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="grid formgrid">
-    <h2>Formulario de ingreso Estudiantes</h2>
+    <h2>
+      @if(student){
+        Editar estudiante
+      } @else {
+        Formulario de ingreso Estudiantes
+      }
+    </h2>
     <div class="col-6">
       <mat-form-field class="w-full">
         <mat-label>Nombre</mat-label>
@@ -81,7 +87,10 @@
 
     </div>
     
-    <div class="col-12 flex justify-content-end">
+    <div mat-dialog-actions>
+      <button type="button" mat-flat-button color="" routerLink="/students">Cancelar</button>
       <button mat-flat-button color="primary">Guardar</button>
     </div>
+      
+    
   </form>

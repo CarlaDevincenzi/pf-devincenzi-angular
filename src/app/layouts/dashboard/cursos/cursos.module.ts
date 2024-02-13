@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { CursoFormComponent } from './curso-form/curso-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from '../../../shared/shared.module';
+import {MatSelectModule} from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { SharedModule } from '../../../shared/shared.module';
     MatIconModule,
     CursoRoutingModule,
     MatButtonModule,
-    SharedModule
+    SharedModule,
+    MatSelectModule,
+    MatInputModule,
   ]
 })
 export class CursosModule { }

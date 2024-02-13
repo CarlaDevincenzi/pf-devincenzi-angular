@@ -36,7 +36,7 @@ export class CursoService {
   addCurso(curso: Curso){
     curso.id = CURSOS[CURSOS.length - 1].id + 1;
     CURSOS = [...CURSOS, curso];    
-    return this.getAllCursos;
+    return this.getAllCursos();
   }
 
   deleteCurso(id: Number): Observable<Curso[]> {

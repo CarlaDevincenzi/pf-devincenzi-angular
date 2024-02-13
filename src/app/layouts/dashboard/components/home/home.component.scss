@@ -1,0 +1,9 @@
+.img-escuela {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh; 
+    object-fit:fill; 
+    z-index: -1; /* Asegura que la imagen esté detrás de otros elementos */
+}

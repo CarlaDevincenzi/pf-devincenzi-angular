@@ -1,1 +1,75 @@
-<p>curso-form works!</p>
+<form [formGroup]="cursoForm" (ngSubmit)="onSubmit()" class="grid formgrid">
+    <h2>
+      @if(curso){
+        Editar curso
+      } @else {
+        Agregar nuevo curso
+      }
+    </h2>
+    <div class="col-6">
+      <mat-form-field class="w-full">
+        <mat-label>Nombre curso</mat-label>
+        <mat-select formControlName="name">
+            <mat-option *ngFor="let item of CURSOS" [value]="item">{{ item }}</mat-option>            
+        </mat-select>    
+      </mat-form-field>
+
+      <div class="text-danger" *ngIf="name?.invalid && (name?.dirty || name?.touched)">        
+            <small  *ngIf="name?.errors?.['required']">
+            El nombre es obligatorio
+            </small>         
+    </div>
+
+    </div>
+    <div class="col-6">
+      <mat-form-field class="w-full">
+        <mat-label>Dia</mat-label>
+        <mat-select formControlName="day">
+            <mat-option *ngFor="let item of DIAS_SEMANA" [value]="item">{{ item }}</mat-option>            
+        </mat-select>
+      </mat-form-field>
+
+      <div class="text-danger" *ngIf="day?.invalid && (day?.dirty || day?.touched)">
+        <small  *ngIf="day?.errors?.['required']">
+            El Dia del curso es obligatorio
+        </small>        
+    </div>
+
+    </div>
+    <div class="col-12">
+      <mat-form-field class="w-full">
+        <mat-label>Horario</mat-label>
+        <mat-select formControlName="time">
+            <mat-option *ngFor="let item of HORARIOS" [value]="item">{{ item }}</mat-option>            
+        </mat-select>        
+      </mat-form-field>
+
+        <div *ngIf="time?.invalid && (time?.dirty || time?.touched)" class="text-danger">
+            <small *ngIf="time?.errors?.['required']">
+                El Horario es requerido.
+            </small>                        
+        </div> 
+
+    </div>
+    <div class="col-6">
+      <mat-form-field class="w-full">
+        <mat-label>Profesor/a</mat-label>
+        <input formControlName="teacher" matInput type="text" />
+      </mat-form-field>
+
+      <div *ngIf="teacher?.invalid && (teacher?.dirty || teacher?.touched)" class="text-danger">
+        <small *ngIf="teacher?.errors?.['pattern']">
+            El nombre solo puede contener letras 
+        </small>                        
+    </div> 
+      
+    </div>    
+    
+    <div mat-dialog-actions>
+      <button type="button" mat-flat-button color="" routerLink="/dashboard/cursos">Cancelar</button>
+      <button mat-flat-button color="primary">Guardar</button>
+    </div>
+      
+    
+  </form>
+

@@ -6,8 +6,8 @@ import { StudentFormComponent } from './student-form/student-form.component';
 
 const routes: Routes = [
   {
-    // Actualmente estamos en: /dashboard/students,
-    path: 'students',
+    // Actualmente estamos en: /students,
+    path: '',
     component: StudentsViewComponent
   },
   {

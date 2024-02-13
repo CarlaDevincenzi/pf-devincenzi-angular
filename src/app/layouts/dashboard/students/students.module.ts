@@ -9,17 +9,16 @@ import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FullNamePipe } from '../../../pipes/full-name.pipe';
-import { FontSizeDirective } from '../../../directives/font-size.directive';
+import { FullNamePipe } from '../../../shared/pipes/full-name.pipe';
+import { FontSizeDirective } from '../../../shared/directives/font-size.directive';
 import { StudentRoutingModule } from './student-routing.module';
+import { SharedModule } from '../../../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     StudentsViewComponent,
-    StudentFormComponent,    
-    FullNamePipe,
-    FontSizeDirective
+    StudentFormComponent,     
   ],
   imports: [
     CommonModule,
@@ -31,7 +30,8 @@ import { StudentRoutingModule } from './student-routing.module';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    SharedModule
   ]
   
 })

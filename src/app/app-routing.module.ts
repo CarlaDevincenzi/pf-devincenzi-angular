@@ -5,13 +5,18 @@ import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
-    path: '',    
+    path: 'dashboard',    
     component: DashboardComponent,
     loadChildren: () =>
       import('./layouts/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
       ),
   },
+
+  {
+    path: '**',
+    redirectTo: 'dashboard'
+  }
 ];
 
 @NgModule({

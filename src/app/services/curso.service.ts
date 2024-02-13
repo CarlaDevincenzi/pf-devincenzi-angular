@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Student } from '../models/student';
+import { Curso } from '../models/curso';
 import { Observable, of } from 'rxjs';
 
+/*
 let STUDENTS: Student[] = [
   {id: 1, name: 'Tony', lastName: 'Stark', dni: 12345678, email: 'tony@gmail.com'},
   {id: 2, name: 'Peter', lastName: 'Parker', dni: 12345677, email: 'peter@gmail.com'},
@@ -13,37 +14,42 @@ let STUDENTS: Student[] = [
   {id: 8, name: 'Federico', lastName: 'Rodriguez',dni: 12345622, email: 'fede@gmail.com'},
   {id: 9, name: 'Hernan', lastName: 'Martinez',dni: 12345611, email: 'hernan@gmail.com'},
   {id: 10, name: 'Juan', lastName: 'Gonzalez',dni: 12345699, email: 'juang@gmail.com'},
+]*/
+
+let CURSOS: Curso[] = [
+  {id: 1, name: "ANGULAR", day: "LUNES", time: "18.30", teacher: "Bruce Wayne"},
+  {id: 2, name: "JAVA", day: "MIERCOLES", time: "20.00", teacher: "Bruce Wayne"},
+  {id: 3, name: "DISEÑO WEB", day: "VIERNES", time: "20.30", teacher: "Bruce Wayne"}  
 ]
 
 @Injectable({
   providedIn: 'root'
 })
-export class StudentService {
+export class CursoService {
 
-  constructor() { }  
+  constructor() { }
 
-  getAllStudents(): Observable<Student[]>{
-    return of(STUDENTS);
+  getAllCursos(): Observable<Curso[]>{
+    return of(CURSOS);
   }
 
-  addStudent(stu: Student){
-    stu.id = STUDENTS[STUDENTS.length - 1].id + 1;
-    STUDENTS = [...STUDENTS, stu];    
-    return this.getAllStudents();
+  addCurso(curso: Curso){
+    curso.id = CURSOS[CURSOS.length - 1].id + 1;
+    CURSOS = [...CURSOS, curso];    
+    return this.getAllCursos;
   }
 
-  deleteStudent(id: Number): Observable<Student[]> {
-    STUDENTS = STUDENTS.filter(stu => stu.id != id);
-    return this.getAllStudents();
+  deleteCurso(id: Number): Observable<Curso[]> {
+    CURSOS = CURSOS.filter(cur => cur.id != id);
+    return this.getAllCursos();
   }
 
-  getStudentById(id: number): Observable<Student | undefined> {
-    return of(STUDENTS.find((stu) => stu.id == id));
+  getCursoById(id: number): Observable<Curso | undefined> {
+    return of(CURSOS.find((cur) => cur.id == id));
   }
 
-  updateStudentById(id: number, student: Student) {
-    STUDENTS = STUDENTS.map((item) => (item.id === id ? { ...item, ...student } : item));
-    return this.getAllStudents();
+  updateCursoById(id: number, curso: Curso) {
+    CURSOS = CURSOS.map((item) => (item.id === id ? { ...item, ...curso } : item));
+    return this.getAllCursos();
   }  
-  
 }

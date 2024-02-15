@@ -1,0 +1,91 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@gmail.com",
+      "password": "123456",
+      "role": "ADMIN"
+    },
+    {
+      "id": "2",
+      "email": "user@gmail.com",
+      "password": "user",
+      "role": "USER"
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "name": "Tony",
+      "lastName": "Stark",
+      "dni": 12345678,
+      "email": "tony@gmail.com"
+    },
+    {
+      "id": 2,
+      "name": "Peter",
+      "lastName": "Parker",
+      "dni": 12345677,
+      "email": "peter@gmail.com"
+    },
+    {
+      "id": 3,
+      "name": "Carla",
+      "lastName": "Devin",
+      "dni": 12345687,
+      "email": "carla@gmail.com"
+    },
+    {
+      "id": 4,
+      "name": "Braian",
+      "lastName": "Martinez",
+      "dni": 12345666,
+      "email": "braian@gmail.com"
+    },
+    {
+      "id": 5,
+      "name": "Bruno",
+      "lastName": "Fernandez",
+      "dni": 12345655,
+      "email": "bruno@gmail.com"
+    },
+    {
+      "id": 6,
+      "name": "Carolina",
+      "lastName": "Ortega",
+      "dni": 12345644,
+      "email": "caro@gmail.com"
+    },
+    {
+      "name": "Natasha",
+      "lastName": "Romanoff",
+      "dni": "35698741",
+      "email": "blackwidow@gmail.com",
+      "id": 7
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "ANGULAR",
+      "day": "LUNES",
+      "time": "18.30",
+      "teacher": "Bruce Wayne"
+    },
+    {
+      "id": 2,
+      "name": "JAVA",
+      "day": "MIERCOLES",
+      "time": "20.00",
+      "teacher": "Bruce Wayne"
+    },
+    {
+      "id": 3,
+      "name": "DISEÑO WEB",
+      "day": "VIERNES",
+      "time": "20.30",
+      "teacher": "Bruce Wayne"
+    }
+  ],
+  "registrations": []
+}

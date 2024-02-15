@@ -57,7 +57,7 @@ export class CursoFormComponent implements OnInit{
   onSubmit() {    
     if (this.cursoForm.valid) {
       if(this.curso) {
-          this.cursoService.updateCursoById(this.curso.id, this.cursoForm.value as Curso)
+          this.cursoService.updateCursoById(this.cursoForm.value as Curso)
             .subscribe(() => {
           this.router.navigateByUrl("/dashboard/cursos");
         })     

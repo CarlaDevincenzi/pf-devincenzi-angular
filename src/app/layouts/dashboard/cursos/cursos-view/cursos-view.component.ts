@@ -29,7 +29,13 @@ export class CursosViewComponent {
 
     if(opcion){
       this.cursoService.deleteCurso(curso.id).subscribe({
-        next: (cursos) => this.dataSource = [...cursos]
+        next: () => {
+          alert(`Curso eliminado con éxito`);
+        },
+        error: (err) => {
+          alert(`Error al intentar eliminar
+          el curso con el id: ${curso.id}\nDescripción: ${err}`);
+        }
       })
     }     
       

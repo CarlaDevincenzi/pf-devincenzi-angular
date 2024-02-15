@@ -58,7 +58,7 @@ export class StudentFormComponent implements OnInit{
   onSubmit() {    
     if (this.studentForm.valid) {
       if(this.student) {
-          this.studentService.updateStudentById(this.student.id, this.studentForm.value as Student)
+          this.studentService.updateStudentById(this.studentForm.value as Student)
         .subscribe(() => {
           this.router.navigateByUrl("dashboard/students");
         })     

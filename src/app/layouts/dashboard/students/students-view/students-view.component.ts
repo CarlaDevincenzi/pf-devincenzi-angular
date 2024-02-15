@@ -1,4 +1,4 @@
-import {  Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {  Component } from '@angular/core';
 import { Student } from '../../../../models/student';
 import { StudentService } from '../../../../services/student.service';
 
@@ -21,7 +21,11 @@ export class StudentsViewComponent {
 
   getStudents(){
     this.studentService.getAllStudents().subscribe({
-      next: (students) => this.dataSource = students
+      next: (students) => this.dataSource = students,
+      error: (errorData) => {
+        console.error(errorData);
+        alert(errorData);
+      }
     })
   }
   
@@ -31,10 +35,15 @@ export class StudentsViewComponent {
 
     if(opcion){
       this.studentService.deleteStudent(student.id).subscribe({
-        next: (students) => this.dataSource = [...students]
+        next: () => {
+          alert(`Estudiante eliminado con éxito`);
+        },
+        error: (err) => {
+          alert(`Error al intentar eliminar
+          el estudiante con el id: ${student.id}\nDescripción: ${err}`);
+        }
       })
-    }     
-      
+    }      
   }  
 
   verMas(id: Number){}

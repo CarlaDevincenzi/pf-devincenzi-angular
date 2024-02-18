@@ -32,8 +32,8 @@ export class CursoService {
     return this.http.get<Curso>(url);
   }
 
-  updateCursoById(curso: Curso) {    
-    const url = `${this.apiUrl}/${curso.id}`;
+  updateCursoById(id: number, curso: Curso) {    
+    const url = `${this.apiUrl}/${id}`;
     return this.http.put<Curso>(url, curso);
   }  
 }

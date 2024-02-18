@@ -15,46 +15,46 @@
   ],
   "students": [
     {
-      "id": 1,
       "name": "Tony",
       "lastName": "Stark",
-      "dni": 12345678,
-      "email": "tony@gmail.com"
+      "dni": "12345678",
+      "email": "tony@gmail.com",
+      "id": 1
     },
     {
       "id": 2,
       "name": "Peter",
       "lastName": "Parker",
-      "dni": 12345677,
+      "dni": "12345677",
       "email": "peter@gmail.com"
     },
     {
       "id": 3,
       "name": "Carla",
       "lastName": "Devin",
-      "dni": 12345687,
+      "dni": "12345687",
       "email": "carla@gmail.com"
     },
     {
       "id": 4,
       "name": "Braian",
       "lastName": "Martinez",
-      "dni": 12345666,
+      "dni": "12345666",
       "email": "braian@gmail.com"
     },
     {
       "id": 5,
       "name": "Bruno",
       "lastName": "Fernandez",
-      "dni": 12345655,
+      "dni": "12345655",
       "email": "bruno@gmail.com"
     },
     {
-      "id": 6,
       "name": "Carolina",
       "lastName": "Ortega",
-      "dni": 12345644,
-      "email": "caro@gmail.com"
+      "dni": "12345647",
+      "email": "caro@gmail.com",
+      "id": 6
     },
     {
       "name": "Natasha",
@@ -62,6 +62,20 @@
       "dni": "35698741",
       "email": "blackwidow@gmail.com",
       "id": 7
+    },
+    {
+      "name": "Juan",
+      "lastName": "Reyes",
+      "dni": "43718643",
+      "email": "juan@gmail.com",
+      "id": 8
+    },
+    {
+      "name": "Simona",
+      "lastName": "Moreno",
+      "dni": "48456126",
+      "email": "simonin@gmail.com",
+      "id": 9
     }
   ],
   "courses": [
@@ -80,11 +94,11 @@
       "teacher": "Bruce Wayne"
     },
     {
-      "id": 3,
       "name": "DISEÑO WEB",
       "day": "VIERNES",
       "time": "20.30",
-      "teacher": "Bruce Wayne"
+      "teacher": "Steve Rogers",
+      "id": 3
     }
   ],
   "registrations": []

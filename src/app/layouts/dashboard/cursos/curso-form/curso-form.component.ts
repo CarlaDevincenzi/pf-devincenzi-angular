@@ -13,40 +13,42 @@ export class CursoFormComponent implements OnInit{
 
   cursoForm!: FormGroup;
   curso?: Curso;
+  id?: string | null;
 
   CURSOS: string[] = ["JAVASCRIPT", "REACT", "VUE.JS", "BIG-DATA", "JAVA SE", "ANGULAR", "DISEÑO WEB", "SPRING BOOT", "PYTHON", "DJANGO"];
   DIAS_SEMANA: string[] = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"];
   HORARIOS: string[] = ["17.00", "18.30", "19.00", "20.00", "20.30"];
 
   constructor(private fb: FormBuilder, private cursoService: CursoService,
-    private router: Router, private activateRoute: ActivatedRoute) {}
+    private router: Router, private activateRoute: ActivatedRoute) {
+      this.id = this.activateRoute.snapshot.paramMap.get("id");
+
+      this.cursoForm = this.fb.group({
+        name: this.fb.control('', Validators.required),
+        day: this.fb.control('', Validators.required),
+        time: this.fb.control('', Validators.required),
+        teacher: this.fb.control('', Validators.pattern(/^[a-zA-ZñÑ\s]+(?: [a-zA-ZñÑ\s]+)?$/))
+      });
+  
+      if(this.id) {
+        this.cursoService.getCursoById(parseInt(this.id)).subscribe(
+          (curso) => {
+            this.curso = curso;
+  
+            this.cursoForm = this.fb.group({
+              name: this.fb.control(this.curso?.name, Validators.required),
+              day: this.fb.control(this.curso?.day, Validators.required),
+              time: this.fb.control(this.curso?.time, Validators.required),
+              teacher: this.fb.control(this.curso?.teacher, Validators.pattern(/^[a-zA-ZñÑ\s]+(?: [a-zA-ZñÑ\s]+)?$/))
+            })
+          }
+        );
+      }    
+    }
   
   
   ngOnInit(): void {
-    const id = this.activateRoute.snapshot.paramMap.get("id");
-
-    if(id) {
-      this.cursoService.getCursoById(parseInt(id)).subscribe(
-        (curso) => {
-          this.curso = curso;
-
-          this.cursoForm = this.fb.group({
-            name: this.fb.control(this.curso?.name, Validators.required),
-            day: this.fb.control(this.curso?.day, Validators.required),
-            time: this.fb.control(this.curso?.time, Validators.required),
-            teacher: this.fb.control(this.curso?.teacher, Validators.pattern(/^[\p{L}ñ\s]+ [\p{L}ñ\s]+$/))
-          })
-        }
-      );
-
-    } else {
-        this.cursoForm = this.fb.group({
-          name: this.fb.control('', Validators.required),
-          day: this.fb.control('', Validators.required),
-          time: this.fb.control('', Validators.required),
-          teacher: this.fb.control('', Validators.pattern(/^[a-zA-ZñÑ\s]+(?: [a-zA-ZñÑ\s]+)?$/))
-        })
-    }
+    
   }
 
   get name() {return this.cursoForm.get('name')}
@@ -57,7 +59,7 @@ export class CursoFormComponent implements OnInit{
   onSubmit() {    
     if (this.cursoForm.valid) {
       if(this.curso) {
-          this.cursoService.updateCursoById(this.cursoForm.value as Curso)
+          this.cursoService.updateCursoById(this.curso.id, this.cursoForm.value as Curso)
             .subscribe(() => {
           this.router.navigateByUrl("/dashboard/cursos");
         })     

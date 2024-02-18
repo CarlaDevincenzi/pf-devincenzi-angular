@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Student } from '../../../../models/student';
 import { StudentService } from '../../../../services/student.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,10 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './student-form.component.html',
   styleUrl: './student-form.component.scss'
 })
-export class StudentFormComponent implements OnInit{  
+export class StudentFormComponent {  
 
   studentForm!: FormGroup;
   student?: Student;
+  id?: string | null;
   
   validaciones = {
       name: [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-ZñÑ\s]+(?: [a-zA-ZñÑ\s]+)?$/)],
@@ -21,33 +22,31 @@ export class StudentFormComponent implements OnInit{
   }
 
   constructor(private fb: FormBuilder, private studentService: StudentService, 
-    private router: Router, private activateRoute: ActivatedRoute) { }
-  
-  
-    ngOnInit(): void {
-    const id = this.activateRoute.snapshot.paramMap.get("id");
+    private router: Router, private activateRoute: ActivatedRoute) { 
+      this.id = this.activateRoute.snapshot.paramMap.get("id");
 
-    if(id) {
-      this.studentService.getStudentById(parseInt(id))
-      .subscribe(student => {
-        this.student = student;
-
-        this.studentForm = this.fb.group({
-          name: this.fb.control(student?.name, this.validaciones.name),
-          lastName: this.fb.control(student?.lastName, this.validaciones.name),
-          dni: this.fb.control(student?.dni, this.validaciones.dni),
-          email: this.fb.control(student?.email, this.validaciones.email)      
-        });
-      })        
-      
-    } else {
       this.studentForm = this.fb.group({
         name: this.fb.control('', this.validaciones.name),
         lastName: this.fb.control('', this.validaciones.name),
         dni: this.fb.control('', this.validaciones.dni),
         email: this.fb.control('', this.validaciones.email)      
       });
-    }
+
+      if(this.id) {
+        this.studentService.getStudentById(parseInt(this.id))
+        .subscribe(student => {
+          this.student = student;
+          
+          console.log("student: " + student.name);
+
+          this.studentForm = this.fb.group({
+            name: this.fb.control(this.student?.name, this.validaciones.name),
+            lastName: this.fb.control(this.student?.lastName, this.validaciones.name),
+            dni: this.fb.control(this.student?.dni, this.validaciones.dni),
+            email: this.fb.control(this.student?.email, this.validaciones.email)                  
+          });          
+        });
+    }  
   }
 
   get name() {return this.studentForm.get('name')}
@@ -55,10 +54,11 @@ export class StudentFormComponent implements OnInit{
   get dni() { return this.studentForm.get('dni')}  
   get email() {return this.studentForm.get('email')}
 
-  onSubmit() {    
+  onSubmit() { 
+    console.log(this.studentForm.value)   
     if (this.studentForm.valid) {
       if(this.student) {
-          this.studentService.updateStudentById(this.studentForm.value as Student)
+          this.studentService.updateStudentById(this.student.id, this.studentForm.value as Student)
         .subscribe(() => {
           this.router.navigateByUrl("dashboard/students");
         })     

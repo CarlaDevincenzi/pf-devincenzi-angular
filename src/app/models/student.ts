@@ -2,6 +2,6 @@ export interface Student {
     id: number;
     name: string;
     lastName: string;
-    dni: number;
+    dni: string;
     email: string;
   }

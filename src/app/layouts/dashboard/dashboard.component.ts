@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Student } from '../../models/student';
 import { StudentService } from '../../services/student.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,11 +10,17 @@ import { StudentService } from '../../services/student.service';
 })
 export class DashboardComponent {
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
    
   
   showFiller = false;
   showEditForm = false;
+
+  /* Cierre de sesion */
+  logOut(){
+    this.authService.logOut();
+  }
+  
   //studentEdit!: Student ;
 
 //   onStudentSubmit(ev: Student): void {

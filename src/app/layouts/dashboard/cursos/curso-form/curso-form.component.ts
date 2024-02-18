@@ -11,7 +11,7 @@ import { Curso } from '../../../../models/curso';
 })
 export class CursoFormComponent implements OnInit{
 
-  cursoForm!: FormGroup;
+  cursoForm: FormGroup;
   curso?: Curso;
   id?: string | null;
 

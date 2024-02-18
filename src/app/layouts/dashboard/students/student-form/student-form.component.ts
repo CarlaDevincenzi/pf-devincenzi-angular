@@ -37,8 +37,6 @@ export class StudentFormComponent {
         .subscribe(student => {
           this.student = student;
           
-          console.log("student: " + student.name);
-
           this.studentForm = this.fb.group({
             name: this.fb.control(this.student?.name, this.validaciones.name),
             lastName: this.fb.control(this.student?.lastName, this.validaciones.name),

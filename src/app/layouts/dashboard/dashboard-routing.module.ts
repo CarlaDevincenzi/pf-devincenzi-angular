@@ -5,7 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 const routes: Routes = [
         // /dashboard
     {
-        path: '',
+        path: 'home',
         component: HomeComponent
     },
     

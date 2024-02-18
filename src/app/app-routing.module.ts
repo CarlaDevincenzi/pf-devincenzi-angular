@@ -12,10 +12,15 @@ const routes: Routes = [
         (m) => m.DashboardModule
       ),
   },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./layouts/auth/auth.module').then((m) => m.AuthModule),
+  },
 
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'auth/login'
   }
 ];
 

@@ -27,7 +27,7 @@
           > Inscripciones </a> 
 
           <a
-          routerLink=""
+          routerLink="home"
           mat-list-item
           > Inicio </a> 
        </mat-nav-list>     
@@ -41,7 +41,9 @@
             <mat-icon>menu</mat-icon>
             </button>
             <span>My-CoderSchool-App</span>
-            <span class="example-spacer"></span>            
+            <span class="example-spacer"></span>
+            
+            <a mat-raised-button (click)="logOut()" >Cerrar Sesion</a>            
         </mat-toolbar>               
 
         <div class="p-5">          

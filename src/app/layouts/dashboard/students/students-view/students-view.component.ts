@@ -1,6 +1,7 @@
 import {  Component } from '@angular/core';
 import { Student } from '../../../../models/student';
 import { StudentService } from '../../../../services/student.service';
+import { AuthService } from '../../../../services/auth.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { StudentService } from '../../../../services/student.service';
 })
 export class StudentsViewComponent {
   
-  constructor(private studentService: StudentService) {
+  constructor(private studentService: StudentService, public authService: AuthService) {
     this.getStudents();
    }  
 

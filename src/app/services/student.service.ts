@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Student } from '../models/student';
-import { Observable, of } from 'rxjs';
+import { Observable, mergeMap, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environments } from '../../environments/environments';
 
@@ -22,9 +22,9 @@ export class StudentService {
     return this.http.post<Student>(this.apiUrl, stu);
   }  
 
-  deleteStudent(id: Number): Observable<Student> {
+  deleteStudent(id: Number): Observable<Student[]> {
     const url = `${this.apiUrl}/${id}`;
-    return this.http.delete<Student>(url);
+    return this.http.delete<Student>(url).pipe(mergeMap(() =>this.getAllStudents()));
   }  
 
   getStudentById(id: number): Observable<Student> {

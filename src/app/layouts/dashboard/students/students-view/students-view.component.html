@@ -37,7 +37,7 @@
         <button  [routerLink]="[element.id,'editar']" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
           <mat-icon>edit</mat-icon>
         </button>
-        <button  (click)="deleteStudent(element)" mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+        <button [disabled]="!authService.isAdmin()" (click)="deleteStudent(element)" mat-icon-button color="warn" aria-label="Example icon button with a home icon">
           <mat-icon>delete</mat-icon>
         </button>
         <button  (click)="verMas(element.id)" mat-icon-button color="accent" aria-label="Example icon button with a home icon">

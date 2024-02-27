@@ -1,42 +1,46 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-    <div class="login-container">
-        <h1 class="h3 mb-3 fw-normal">Iniciar Sesion</h1>
-    </div>
-    <div class="mb-3 login-container">
-        <mat-form-field appearance="fill">
-            <mat-label>email</mat-label>
-            <input matInput formControlName="email">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
-        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
-            class="text-danger">
-            <small *ngIf="email?.errors?.['required']">
-                El email es requerido.
-            </small>
-            <small *ngIf="email?.errors?.['email']">
-                Formato de email invalido
-            </small>            
-        </div>          
-    </div>
-    <div class="mb-3 login-container">
-        <mat-form-field>
-            <mat-label>password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-        </mat-form-field>
-        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)"
-            class="text-danger">
-            <small *ngIf="password?.errors?.['required']">
-                La contraseña es requerida.
-            </small>
-        </div> 
-    </div>
-        <p class="text-danger">{{loginError}}</p>        
-    <div class="login-container">    
-        <button type="submit" class="btn btn-primary">Iniciar sesion</button>
-    </div>
+<div class="component-login">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="login-container">
+            <h1 class="h3 mb-3 fw-normal">Iniciar Sesion</h1>
+        </div>
+        <div class="mb-3 login-container">
+            <mat-form-field appearance="fill">
+                <mat-label>email</mat-label>
+                <input matInput formControlName="email">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
             
-</form>
-
+        </div>
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                class="text-danger">
+                <small *ngIf="email?.errors?.['required']">
+                    El email es requerido.
+                </small>
+                <small *ngIf="email?.errors?.['email']">
+                    Formato de email invalido
+                </small>
+            </div>
+        <div class="mb-3 login-container">
+            <mat-form-field>
+                <mat-label>password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            
+        </div>
+        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+                class="text-danger">
+                <small *ngIf="password?.errors?.['required']">
+                    La contraseña es requerida.
+                </small>
+            </div>
+            <p class="text-danger">{{loginError}}</p>
+        <div class="login-container">
+            <button type="submit" class="btn btn-primary">Iniciar sesion</button>
+        </div>
+    
+    </form>
+    
+</div>

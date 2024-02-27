@@ -27,6 +27,9 @@
           > Inscripciones </a> 
 
           <a
+          #homeLink="routerLinkActive"
+          routerLinkActive
+          [activated]="homeLink.isActive"
           routerLink="home"
           mat-list-item
           > Inicio </a> 

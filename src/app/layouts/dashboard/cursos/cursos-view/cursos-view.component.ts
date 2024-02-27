@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CursoService } from '../../../../services/curso.service';
 import { Curso } from '../../../../models/curso';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-cursos-view',
@@ -9,7 +10,7 @@ import { Curso } from '../../../../models/curso';
 })
 export class CursosViewComponent {
 
-  constructor(private cursoService: CursoService) {
+  constructor(private cursoService: CursoService, public authService: AuthService) {
     this.getCursos();
    }  
 

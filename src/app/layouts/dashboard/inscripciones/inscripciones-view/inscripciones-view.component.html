@@ -1,1 +1,68 @@
-<p>inscripciones-view works!</p>
+<div class="mat-elevation-z8">
+    <h2>Listado de inscripciones</h2>
+
+    <div class="text-end">
+      <button class="btn btn-primary me-2" [routerLink]="['nuevo']" >Nueva inscripcion</button>
+    </div>
+
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef appFontSize> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Fecha">
+      <th mat-header-cell *matHeaderCellDef appFontSize> Fecha inscripto </th>
+      <td mat-cell *matCellDef="let element"> {{ element.fecha | date: 'short' }} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Curso">
+      <th mat-header-cell *matHeaderCellDef appFontSize> Curso </th>
+      <td mat-cell *matCellDef="let element"> {{ element.curso }} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Dia">
+      <th mat-header-cell *matHeaderCellDef appFontSize> Dia </th>
+      <td mat-cell *matCellDef="let element"> {{ element.dia }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Horario">
+        <th mat-header-cell *matHeaderCellDef appFontSize> Horario </th>
+        <td mat-cell *matCellDef="let element"> {{ element.horario }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Profesor/a">
+        <th mat-header-cell *matHeaderCellDef appFontSize> Profesor/a </th>
+        <td mat-cell *matCellDef="let element"> {{ element.teacher }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Alumno/a">
+        <th mat-header-cell *matHeaderCellDef appFontSize> Estudiante </th>
+        <td mat-cell *matCellDef="let element"> {{ element.student | fullName }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Acciones">
+      <th mat-header-cell *matHeaderCellDef appFontSize>Acciones</th>
+      <td mat-cell *matCellDef="let element">
+        <button  [routerLink]="[element.id,'editar']" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button [disabled]="!authService.isAdmin()" (click)="deleteInscripcion(element)" mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+          <mat-icon>delete</mat-icon>
+        </button>               
+      </td>
+    </ng-container>
+
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  
+</div>
+

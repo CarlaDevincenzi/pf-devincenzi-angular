@@ -8,19 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
 @NgModule({
   declarations: [FullNamePipe, FontSizeDirective],
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatButtonModule,
-    MatTableModule    
+    CommonModule,        
   ],
   exports: [
     FullNamePipe, 
@@ -30,7 +25,8 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
-    MatTableModule 
+    MatTableModule,
+    MatDialogModule, 
   ]
 })
 export class SharedModule { }

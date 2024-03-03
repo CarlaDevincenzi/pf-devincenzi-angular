@@ -15,43 +15,44 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="Fecha">
-      <th mat-header-cell *matHeaderCellDef appFontSize> Fecha inscripto </th>
-      <td mat-cell *matCellDef="let element"> {{ element.fecha | date: 'short' }} </td>
+      <th mat-header-cell *matHeaderCellDef appFontSize> Fecha inscripcion </th>
+      <td mat-cell *matCellDef="let element"> {{ element.fechaHora | date: 'short' }} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="Curso">
       <th mat-header-cell *matHeaderCellDef appFontSize> Curso </th>
-      <td mat-cell *matCellDef="let element"> {{ element.curso }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.course?.name }} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="Dia">
       <th mat-header-cell *matHeaderCellDef appFontSize> Dia </th>
-      <td mat-cell *matCellDef="let element"> {{ element.dia }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.course?.day }} </td>
     </ng-container>
 
     <ng-container matColumnDef="Horario">
         <th mat-header-cell *matHeaderCellDef appFontSize> Horario </th>
-        <td mat-cell *matCellDef="let element"> {{ element.horario }} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.course?.time }} </td>
     </ng-container>
 
     <ng-container matColumnDef="Profesor/a">
         <th mat-header-cell *matHeaderCellDef appFontSize> Profesor/a </th>
-        <td mat-cell *matCellDef="let element"> {{ element.teacher }} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.course?.teacher }} </td>
     </ng-container>
 
     <ng-container matColumnDef="Alumno/a">
         <th mat-header-cell *matHeaderCellDef appFontSize> Estudiante </th>
-        <td mat-cell *matCellDef="let element"> {{ element.student | fullName }} </td>
+        <td mat-cell *matCellDef="let element"> 
+            <a class="link" (click)="verStudentData(element.student)">
+                {{ element.student | fullName  }}
+            </a> 
+        </td>
     </ng-container>
 
     <ng-container matColumnDef="Acciones">
       <th mat-header-cell *matHeaderCellDef appFontSize>Acciones</th>
-      <td mat-cell *matCellDef="let element">
-        <button  [routerLink]="[element.id,'editar']" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-          <mat-icon>edit</mat-icon>
-        </button>
+      <td mat-cell *matCellDef="let element">        
         <button [disabled]="!authService.isAdmin()" (click)="deleteInscripcion(element)" mat-icon-button color="warn" aria-label="Example icon button with a home icon">
           <mat-icon>delete</mat-icon>
         </button>               
@@ -62,7 +63,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
   
 </div>
 

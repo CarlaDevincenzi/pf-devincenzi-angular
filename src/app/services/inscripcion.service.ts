@@ -14,7 +14,7 @@ export class InscripcionService {
   constructor(private http: HttpClient) { }
 
   getAllInscripciones(): Observable<Inscripcion[]>{
-    return this.http.get<Inscripcion[]>(`${this.apiUrl}?_embed=stutent&_embed=course`);
+    return this.http.get<Inscripcion[]>(`${this.apiUrl}?_expand=student&_expand=course`);
     
   }
 

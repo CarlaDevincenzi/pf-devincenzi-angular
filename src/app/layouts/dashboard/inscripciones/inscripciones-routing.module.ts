@@ -8,7 +8,8 @@ const routes: Routes = [
     {
         // Actualmente estamos en: dashboard/inscripciones,
         path: '',
-        component: InscripcionesViewComponent
+        component: InscripcionesViewComponent,
+        canActivate: [authGuard], data: {roles: ['ADMIN', 'USER']},
       },
       {
         path: 'nuevo',

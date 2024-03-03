@@ -3,9 +3,9 @@ import { Student } from "./student";
 
 export interface Inscripcion {
     id: number;
-    student_id: number;
-    curso_id: number;
+    studentId: number;
+    courseId: number;
     fechaHora: Date;
     student?: Student;
-    curso?: Curso; 
+    course?: Curso; 
 }

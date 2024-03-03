@@ -6,12 +6,14 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { StudentRoutingModule } from './student-routing.module';
 import { SharedModule } from '../../../shared/shared.module';
+import { StudentDialogComponent } from './student-dialog/student-dialog.component';
 
 
 @NgModule({
   declarations: [
     StudentsViewComponent,
-    StudentFormComponent,     
+    StudentFormComponent,
+    StudentDialogComponent,     
   ],
   imports: [
     CommonModule,
